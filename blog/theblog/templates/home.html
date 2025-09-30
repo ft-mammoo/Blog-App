@@ -3,7 +3,8 @@
 <ul>
 
 {% for blogpost in object_list %}
-    <li><strong>{{ blogpost.title }} - {{ blogpost.author.first_name }} {{ blogpost.author.last_name }}</strong> <br/>
+    <li>
+        <a href="{% url 'article-detail' blogpost.pk %}"><strong>{{ blogpost.title }}</a> - {{ blogpost.author.first_name }} {{ blogpost.author.last_name }}</strong> <br/>
         <em>@{{ blogpost.author }}</em><br>
         <p>{{ blogpost.content }}</p>
     </li>

@@ -5,3 +5,7 @@ from .models import BlogPost
 class HomePageView(ListView):
     model = BlogPost
     template_name = 'home.html'
+
+class ArticleDetailView(DetailView):
+    model = BlogPost
+    template_name = 'articleDetail.html'
