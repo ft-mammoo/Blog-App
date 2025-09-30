@@ -1,1 +1,12 @@
-<h1>Hello</h1>
+<h1>Blog Post</h1>
+
+<ul>
+
+{% for blogpost in object_list %}
+    <li><strong>{{ blogpost.title }} - {{ blogpost.author.first_name }} {{ blogpost.author.last_name }}</strong> <br/>
+        <em>@{{ blogpost.author }}</em><br>
+        <p>{{ blogpost.content }}</p>
+    </li>
+{% endfor %}
+
+</ul>
