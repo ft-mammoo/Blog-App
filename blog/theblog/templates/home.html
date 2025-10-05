@@ -7,7 +7,20 @@
 
 {% for blogpost in object_list %}
     <li>
-        <a href="{% url 'article-detail' blogpost.pk %}"><strong>{{ blogpost.title }}</a> - {{ blogpost.author.first_name }} {{ blogpost.author.last_name }}</strong> <br/>
+        <a href="{% url 'article-detail' blogpost.pk %}">
+            <strong>
+                {{ blogpost.title }}
+            </strong>
+        </a> - 
+        <strong>
+            {{ blogpost.author.first_name }} {{ blogpost.author.last_name }}
+        </strong> -
+        <a href="{% url 'edit-post' blogpost.pk %}">
+            <strong>
+                [Edit Post]
+            </strong>
+        </a>
+        <br/>
         <em>@{{ blogpost.author }}</em><br>
         <p>{{ blogpost.content }}</p>
     </li>
