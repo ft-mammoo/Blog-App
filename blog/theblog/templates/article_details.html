@@ -8,7 +8,7 @@
 
 <h1>{{ blogpost.title }}</h1>
 <strong>
-    By: {{ blogpost.author.first_name }} {{ blogpost.author.last_name }}
+    By: {{ blogpost.author.first_name }} {{ blogpost.author.last_name }} On: {{ blogpost.created_at | date:"F d, Y - P" }}
 </strong> - 
 <a href="{% url 'edit-post' blogpost.pk %}">
     <strong>
