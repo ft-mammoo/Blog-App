@@ -15,7 +15,12 @@
         [Edit Post]
     </strong>
 </a>
-
+|
+<a href="{% url 'delete-post' blogpost.pk %}">
+    <strong>
+        [Delete Post]
+    </strong>
+</a>
 <br/>
 <small>@{{ blogpost.author }}</small><br><hr>
 <p>{{ blogpost.content }}</p>
