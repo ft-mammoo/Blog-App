@@ -9,18 +9,21 @@
 <h1>{{ blogpost.title }}</h1>
 <strong>
     By: {{ blogpost.author.first_name }} {{ blogpost.author.last_name }} On: {{ blogpost.created_at | date:"F d, Y - P" }}
-</strong> - 
-<a href="{% url 'edit-post' blogpost.pk %}">
-    <strong>
-        [Edit Post]
-    </strong>
-</a>
-|
-<a href="{% url 'delete-post' blogpost.pk %}">
-    <strong>
-        [Delete Post]
-    </strong>
-</a>
+</strong>
+{% if user.is_authenticated %}
+    - 
+    <a href="{% url 'edit-post' blogpost.pk %}">
+        <strong>
+            [Edit Post]
+        </strong>
+    </a>
+    |
+    <a href="{% url 'delete-post' blogpost.pk %}">
+        <strong>
+            [Delete Post]
+        </strong>
+    </a>
+{% endif %}
 <br/>
 <small>@{{ blogpost.author }}</small><br><hr>
 <p>{{ blogpost.content }}</p>

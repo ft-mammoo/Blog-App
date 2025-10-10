@@ -37,15 +37,26 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url "create-post" %}">Create Blog Post</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url "signup" %}">SignUp</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url "login" %}">Login</a>
-                        </li>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url "create-post" %}">Create Blog Post</a>
+                            </li>
+                            <li class="nav-item">
+                                <form method="post" action="{% url "logout" %}" class="d-inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="nav-link" style="background: none; border: none; padding: .5rem 1rem; color: rgba(255, 255, 255, .55);">
+                                        Logout
+                                    </button>
+                                </form>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url "signup" %}">SignUp</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url "login" %}">Login</a>
+                            </li>
+                        {% endif %}
                     </ul>    
                 </div>
             </div>

@@ -4,14 +4,20 @@
 {% endblock %}
 
 {% block content %}
-<h1>Delete Blog Post</h1>
-<p>Are you sure you want to delete {{ post.title }}?</p>
-<br><hr>
-<div class="form-group">
-    <form method="POST">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-danger">Delete</button>
-        <a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>
-    </form>
-</div>
+
+{% if user.is_authenticated %}
+    <h1>Delete Blog Post</h1>
+    <p>Are you sure you want to delete {{ post.title }}?</p>
+    <br><hr>
+    <div class="form-group">
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+{% else %}
+    <h1>You must be logged in to delete a blog post.</h1>
+    <a href="{% url 'login' %}">Login</a> <a href="{% url 'signup' %}">Sign Up</a>
+{% endif %}
 {% endblock %}

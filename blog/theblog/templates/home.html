@@ -14,21 +14,25 @@
         </a> - 
         <strong>
             {{ blogpost.author.first_name }} {{ blogpost.author.last_name }} - {{ blogpost.created_at | date:"d/m/Y" }}
-        </strong> -
-        <a href="{% url 'edit-post' blogpost.pk %}">
-            <strong>
-                [Edit Post]
-            </strong>
-        </a>
-        |
-        <a href="{% url 'delete-post' blogpost.pk %}">
-            <strong>
-                [Delete Post]
-            </strong>
-        </a>
+        </strong>
+        
+        {% if user.is_authenticated %}
+            -
+            <a href="{% url 'edit-post' blogpost.pk %}">
+                <strong>
+                    [Edit Post]
+                </strong>
+            </a>
+            |
+            <a href="{% url 'delete-post' blogpost.pk %}">
+                <strong>
+                    [Delete Post]
+                </strong>
+            </a>
+        {% endif %}
         <br/>
         <em>@{{ blogpost.author }}</em><br>
-        <p>{{ blogpost.content }}</p>
+        <p>{{ blogpost.content | slice:"250" }}</p>
     </li>
 {% endfor %}
 
