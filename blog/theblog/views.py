@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import BlogPost
+from .models import BlogPost, Category
 from .forms import BlogPostForm, EditBlogPostForm
 from django.urls import reverse_lazy
 
@@ -17,6 +17,11 @@ class CreatePostView(CreateView):
     model = BlogPost
     form_class = BlogPostForm
     template_name = 'create_post.html'
+
+class CreateCategoryView(CreateView):
+    model = Category
+    fields = '__all__'
+    template_name = 'create_category.html'
 
 class EditPostView(UpdateView):
     model = BlogPost

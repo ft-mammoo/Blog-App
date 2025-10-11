@@ -13,7 +13,7 @@
             </strong>
         </a> - 
         <strong>
-            {{ blogpost.author.first_name }} {{ blogpost.author.last_name }} - {{ blogpost.created_at | date:"d/m/Y" }}
+            {{ blogpost.author.first_name }} {{ blogpost.author.last_name }} - {{ blogpost.created_at | date:"d/m/Y" }} - {{ blogpost.category.name }}
         </strong>
         
         {% if user.is_authenticated %}

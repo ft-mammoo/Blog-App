@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Create New Category
+{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+    <h1>Create New Category</h1>
+    <br><hr>
+
+    <div class="form-group">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-secondary">Add Category</button>
+        </form>
+    </div>
+{% else %}
+    <h1>You must be logged in to create a new category.</h1>
+    <a href="{% url 'login' %}">Login</a> or <a href="{% url 'signup' %}">Sign Up</a>
+{% endif %}
+
+{% endblock %}
