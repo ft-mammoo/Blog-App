@@ -13,8 +13,13 @@
             </strong>
         </a> - 
         <strong>
-            {{ blogpost.author.first_name }} {{ blogpost.author.last_name }} - {{ blogpost.created_at | date:"d/m/Y" }} - {{ blogpost.category.name }}
+            {{ blogpost.author.first_name }} {{ blogpost.author.last_name }} - {{ blogpost.created_at | date:"d/m/Y" }} - 
         </strong>
+        <a href="{% url 'category' blogpost.category.name %}">
+            <strong>
+                {{ blogpost.category.name }}
+            </strong>
+        </a>
         
         {% if user.is_authenticated %}
             -

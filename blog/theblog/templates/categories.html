@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if category_posts %}
+<h1>{{ categs }}</h1>
+    <ul>
+        {% for blogpost in category_posts %}
+        <li>
+            <a href="{% url 'article-detail' blogpost.pk %}">
+                <strong>
+                    {{ blogpost.title }}
+                </strong>
+            </a> - 
+            <strong>
+                {{ blogpost.author.first_name }} {{ blogpost.author.last_name }} - {{ blogpost.created_at | date:"d/m/Y" }}
+            </strong>
+            
+            {% if user.is_authenticated %}
+            -
+            <a href="{% url 'edit-post' blogpost.pk %}">
+                <strong>
+                    [Edit Post]
+                </strong>
+            </a>
+            |
+            <a href="{% url 'delete-post' blogpost.pk %}">
+                <strong>
+                    [Delete Post]
+                </strong>
+            </a>
+            {% endif %}
+            <br/>
+            <em>@{{ blogpost.author }}</em><br>
+            <p>{{ blogpost.content | slice:"250" }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <h1 align="center">No posts available in this category.</h1>
+{% endif %}
+    
+{% endblock %}

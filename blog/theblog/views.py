@@ -4,6 +4,9 @@ from .models import BlogPost, Category
 from .forms import BlogPostForm, EditBlogPostForm
 from django.urls import reverse_lazy
 
+def CategoryView(request, categs):
+    category_posts = BlogPost.objects.filter(category__name__iexact=categs)
+    return render(request, 'categories.html', {'categs': categs.title(), 'category_posts': category_posts})
 class HomePageView(ListView):
     model = BlogPost
     template_name = 'home.html'
