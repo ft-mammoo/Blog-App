@@ -15,7 +15,7 @@
         <strong>
             {{ blogpost.author.first_name }} {{ blogpost.author.last_name }} - {{ blogpost.created_at | date:"d/m/Y" }} - 
         </strong>
-        <a href="{% url 'category' blogpost.category.name %}">
+        <a href="{% url 'category' blogpost.category.name|slugify %}">
             <strong>
                 {{ blogpost.category.name }}
             </strong>
