@@ -22,18 +22,20 @@
         </a>
         
         {% if user.is_authenticated %}
-            -
-            <a href="{% url 'edit-post' blogpost.pk %}">
-                <strong>
-                    [Edit Post]
-                </strong>
-            </a>
-            |
-            <a href="{% url 'delete-post' blogpost.pk %}">
-                <strong>
-                    [Delete Post]
-                </strong>
-            </a>
+            {% if user.id == blogpost.author.id %}
+                <a href="{% url 'edit-post' blogpost.pk %}">
+                    <strong>
+                        - 
+                        [Edit Post]
+                    </strong>
+                </a>
+                |
+                <a href="{% url 'delete-post' blogpost.pk %}">
+                    <strong>
+                        [Delete Post]
+                    </strong>
+                </a>
+            {% endif %}
         {% endif %}
         <br/>
         <em>@{{ blogpost.author }}</em><br>
