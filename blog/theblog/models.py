@@ -17,6 +17,7 @@ class BlogPost(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
+    likes = models.ManyToManyField(User, related_name='blogpost_likes')
 
     def __str__(self):
         return self.title + " by " + str(self.author)

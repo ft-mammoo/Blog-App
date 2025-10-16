@@ -30,7 +30,20 @@
 <small>@{{ blogpost.author }}</small><br><hr>
 <p>{{ blogpost.content | linebreaks }}</p>
 
-<br><hr>
+<br><hr><br>
+{% if user.is_authenticated %}
+    {% if user.id == blogpost.author.id %}
+    
+        <form action="{% url 'like-post' blogpost.pk %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" name="post_id" value="{{ blogpost.id }}" class="btn btn-primary btn-sm">
+                Like 
+            </button> - {{ blogpost.likes.count }} Likes
+        </form>
+    {% endif %}
+{% endif %}
+
+<br><hr><br>
 
 <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
 {% endblock %}

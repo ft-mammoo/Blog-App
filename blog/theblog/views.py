@@ -1,8 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import BlogPost, Category
 from .forms import BlogPostForm, EditBlogPostForm
 from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect
+
+def LikeView(request, pk):
+    postblog = get_object_or_404(BlogPost, id=request.POST.get('post_id'))
+    postblog.likes.add(request.user)
+    return HttpResponseRedirect(reverse_lazy('article-detail', args=[str(pk)]))
 
 
 class HomePageView(ListView):
