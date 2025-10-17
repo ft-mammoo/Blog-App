@@ -32,17 +32,32 @@
 
 <br><hr><br>
 {% if user.is_authenticated %}
-    <form action="{% url 'like-post' blogpost.pk %}" method="POST">
+    <form action="{% url 'like-post' blogpost.pk %}" method="POST" style="display:inline;">
         {% csrf_token %}
-        <button type="submit" name="post_id" value="{{ blogpost.id }}" class="btn btn-primary btn-sm">
+        <button type="submit" name="post_id" value="{{ blogpost.id }}" class="btn btn-sm 
+            {% if has_liked %}btn-success{% else %}btn-outline-success{% endif %}">
             {% if has_liked %}
                 Liked
             {% else %}
-                Like
+                Like 👍
             {% endif %}
         </button>
         {% if blogpost.likes.count > 0 %}
-             - {{ blogpost.likes.count }} Like{{ blogpost.likes.count|pluralize }}
+             {{ blogpost.likes.count }}
+        {% endif %}
+    </form>
+    <form action="{% url 'dislike-post' blogpost.pk %}" method="POST" style="display:inline; margin-left: 10px;">
+        {% csrf_token %}
+        <button type="submit" name="post_id" value="{{ blogpost.id }}" class="btn btn-sm 
+            {% if has_disliked %}btn-danger{% else %}btn-outline-danger{% endif %}">
+            {% if has_disliked %}
+                Disliked
+            {% else %}
+                Dislike 👎
+            {% endif %}
+        </button>
+        {% if blogpost.dislikes.count > 0 %}
+            {{ blogpost.dislikes.count }}
         {% endif %}
     </form>
 {% endif %}

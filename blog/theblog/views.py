@@ -14,6 +14,22 @@ def LikeView(request, pk):
             postblog.likes.remove(request.user)
         else:
             postblog.likes.add(request.user)
+            if postblog.dislikes.filter(id=request.user.id).exists():
+                postblog.dislikes.remove(request.user)
+        return HttpResponseRedirect(reverse_lazy('article-detail', args=[str(pk)]))
+    return HttpResponseRedirect(reverse_lazy('home'))
+
+def DislikeView(request, pk):
+    postblog = get_object_or_404(BlogPost, id=pk)
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse_lazy('article-detail', args=[str(pk)]))
+    if request.method == 'POST':
+        if postblog.dislikes.filter(id=request.user.id).exists():
+            postblog.dislikes.remove(request.user)
+        else:
+            postblog.dislikes.add(request.user)
+            if postblog.likes.filter(id=request.user.id).exists():
+                postblog.likes.remove(request.user)
         return HttpResponseRedirect(reverse_lazy('article-detail', args=[str(pk)]))
     return HttpResponseRedirect(reverse_lazy('home'))
 
@@ -39,8 +55,10 @@ class ArticleDetailView(DetailView):
 
         if self.request.user.is_authenticated:
             context['has_liked'] = blogpost.likes.filter(id=self.request.user.id).exists()
+            context['has_disliked'] = blogpost.dislikes.filter(id=self.request.user.id).exists()
         else:
             context['has_liked'] = False
+            context['has_disliked'] = False
 
         return context  
 
