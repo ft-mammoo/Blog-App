@@ -6,9 +6,16 @@ from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 
 def LikeView(request, pk):
-    postblog = get_object_or_404(BlogPost, id=request.POST.get('post_id'))
-    postblog.likes.add(request.user)
-    return HttpResponseRedirect(reverse_lazy('article-detail', args=[str(pk)]))
+    postblog = get_object_or_404(BlogPost, id=pk)
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse_lazy('article-detail', args=[str(pk)]))
+    if request.method == 'POST':        
+        if postblog.likes.filter(id=request.user.id).exists():
+            postblog.likes.remove(request.user)
+        else:
+            postblog.likes.add(request.user)
+        return HttpResponseRedirect(reverse_lazy('article-detail', args=[str(pk)]))
+    return HttpResponseRedirect(reverse_lazy('home'))
 
 
 class HomePageView(ListView):
@@ -25,6 +32,17 @@ def CategoryView(request, categs):
 class ArticleDetailView(DetailView):
     model = BlogPost
     template_name = 'article_details.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ArticleDetailView, self).get_context_data(*args, **kwargs)
+        blogpost = self.object
+
+        if self.request.user.is_authenticated:
+            context['has_liked'] = blogpost.likes.filter(id=self.request.user.id).exists()
+        else:
+            context['has_liked'] = False
+
+        return context  
 
 class CreatePostView(CreateView):
     model = BlogPost

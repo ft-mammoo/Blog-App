@@ -32,15 +32,19 @@
 
 <br><hr><br>
 {% if user.is_authenticated %}
-    {% if user.id == blogpost.author.id %}
-    
-        <form action="{% url 'like-post' blogpost.pk %}" method="POST">
-            {% csrf_token %}
-            <button type="submit" name="post_id" value="{{ blogpost.id }}" class="btn btn-primary btn-sm">
-                Like 
-            </button> - {{ blogpost.likes.count }} Likes
-        </form>
-    {% endif %}
+    <form action="{% url 'like-post' blogpost.pk %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" name="post_id" value="{{ blogpost.id }}" class="btn btn-primary btn-sm">
+            {% if has_liked %}
+                Liked
+            {% else %}
+                Like
+            {% endif %}
+        </button>
+        {% if blogpost.likes.count > 0 %}
+             - {{ blogpost.likes.count }} Like{{ blogpost.likes.count|pluralize }}
+        {% endif %}
+    </form>
 {% endif %}
 
 <br><hr><br>
