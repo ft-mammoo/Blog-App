@@ -23,9 +23,9 @@
         
         {% if user.is_authenticated %}
             {% if user.id == blogpost.author.id %}
+                - |
                 <a href="{% url 'edit-post' blogpost.pk %}">
                     <strong>
-                        - 
                         [Edit Post]
                     </strong>
                 </a>
@@ -35,6 +35,7 @@
                         [Delete Post]
                     </strong>
                 </a>
+                |
             {% endif %}
         {% endif %}
         <br/>

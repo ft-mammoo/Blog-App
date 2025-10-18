@@ -12,9 +12,9 @@
 </strong>
 {% if user.is_authenticated %}
     {% if user.id == blogpost.author.id %}
+        |
         <a href="{% url 'edit-post' blogpost.pk %}">
             <strong>
-                - 
                 [Edit Post]
             </strong>
         </a>
@@ -24,6 +24,7 @@
                 [Delete Post]
             </strong>
         </a>
+        |
     {% endif %}
 {% endif %}
 <br/>
@@ -60,6 +61,10 @@
             {{ blogpost.dislikes.count }}
         {% endif %}
     </form>
+{% else %}
+    <p>
+        <a href="{% url 'login' %}">Log in</a> to like or dislike this post.
+    </p>
 {% endif %}
 
 <br><hr><br>
