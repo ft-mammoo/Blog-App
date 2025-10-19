@@ -29,7 +29,7 @@
 {% endif %}
 <br/>
 <small>@{{ blogpost.author }}</small><br><hr>
-<p>{{ blogpost.content | linebreaks }}</p>
+<p>{{ blogpost.content | safe | linebreaks }}</p>
 
 <br><hr><br>
 {% if user.is_authenticated %}

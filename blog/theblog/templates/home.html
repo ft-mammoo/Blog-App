@@ -40,7 +40,7 @@
         {% endif %}
         <br/>
         <em>@{{ blogpost.author }}</em><br>
-        <p>{{ blogpost.content | slice:"250" }}</p>
+        <p>{{ blogpost.content | safe | slice:"250" }}</p>
     </li>
 {% endfor %}
 
