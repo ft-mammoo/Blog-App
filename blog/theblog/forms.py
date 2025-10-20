@@ -24,12 +24,13 @@ class BlogPostForm(forms.ModelForm):
     content = forms.CharField(widget=CKEditorWidget())
     class Meta:
         model = BlogPost
-        fields = ['title', 'title_tag', 'author', 'category', 'content']
+        fields = ['title', 'title_tag', 'author', 'category', 'content', 'snippet']
         widgets = {
             'title' : forms.TextInput(attrs={'class' : 'form-control', 'placeholder': 'Enter title here'}),
             'title_tag' : forms.TextInput(attrs={'class' : 'form-control', 'placeholder' : 'Enter title tag here'}),
             'author' : forms.TextInput(attrs={'class' : 'form-control', 'id' : 'authorid', 'value' : '', 'type' : 'hidden'}),
             'category' : forms.Select(choices=choice_list,attrs={'class' : 'form-control', 'placeholder' : 'Select category'}),
+            'snippet' : forms.TextInput(attrs={'class' : 'form-control', 'placeholder' : 'Enter a brief snippet about the post'}),
         }
     
     def clean_content(self):
@@ -49,12 +50,12 @@ class EditBlogPostForm(forms.ModelForm):
     content = forms.CharField(widget=CKEditorWidget())
     class Meta:
         model = BlogPost
-        fields = ['title', 'title_tag', 'category', 'content']
+        fields = ['title', 'title_tag', 'category', 'content', 'snippet']
         widgets = {
             'title' : forms.TextInput(attrs={'class' : 'form-control', 'placeholder': 'Enter title here'}),
             'title_tag' : forms.TextInput(attrs={'class' : 'form-control', 'placeholder' : 'Enter title tag here'}),
             'category' : forms.Select(choices=choice_list,attrs={'class' : 'form-control', 'placeholder' : 'Select category'}),
-            #'content' : forms.Textarea(attrs={'class' : 'form-control', 'placeholder' : 'Write your content here'}),
+            'snippet' : forms.TextInput(attrs={'class' : 'form-control', 'placeholder' : 'Enter a brief snippet about the post'}),
         }
         
     def clean_content(self):

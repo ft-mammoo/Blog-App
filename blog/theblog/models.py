@@ -19,6 +19,7 @@ class BlogPost(models.Model):
     content = RichTextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
+    snippet = models.CharField(max_length=255)
     likes = models.ManyToManyField(User, related_name='blogpost_likes')
     dislikes = models.ManyToManyField(User, related_name='blog_posts_disliked',)
 

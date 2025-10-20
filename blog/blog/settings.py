@@ -133,7 +133,7 @@ CKEDITOR_CONFIGS = {
         'toolbar_MinimalBlog': [
             ['Styles', 'Format', 'Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker', 'Undo', 'Redo'],
             ['Link', 'Unlink', 'Anchor'],
-            ['Flash', 'Table', 'HorizontalRule'],
+            ['Image','Flash', 'Table', 'HorizontalRule'],
             ['TextColor', 'BGColor'],
             ['Smiley', 'SpecialChar'], 
             ['Source'],
