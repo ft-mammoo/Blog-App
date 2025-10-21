@@ -36,7 +36,6 @@ class BlogPostForm(forms.ModelForm):
             'title' : forms.TextInput(attrs={'class' : 'form-control', 'placeholder': 'Enter title here'}),
             'title_tag' : forms.TextInput(attrs={'class' : 'form-control', 'placeholder' : 'Enter title tag here'}),
             'author' : forms.TextInput(attrs={'class' : 'form-control', 'id' : 'authorid', 'value' : '', 'type' : 'hidden'}),
-            # ⚠️ Note: We no longer pass 'choices=choice_list' here, we set them in __init__
             'category' : forms.Select(attrs={'class' : 'form-control', 'placeholder' : 'Select category'}),
             'snippet' : forms.TextInput(attrs={'class' : 'form-control', 'placeholder' : 'Enter a brief snippet about the post'}),
         }
