@@ -1,92 +1,76 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
-
-# C extensions
-*.so
-
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-*.egg-info/
-.installed.cfg
-*.egg
-
-# Django stuff:
+# Django
 *.log
 *.pot
 *.pyc
-*.pyo
-*.db
-*.sqlite3
+local_settings.py
 db.sqlite3
+db.sqlite3-journal
 media/
 staticfiles/
+static/admin/
+static/debug_toolbar/
 
-local_settings.py
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+*.egg
 
-# Pytest
-.cache
-.pytest_cache/
-
-# VS Code
-.vscode/
-
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# PyCharm
-.idea/
-
-# Environments
+# Environment Variables
 .env
-.venv
-env/
+.env.local
+.env.development
+.env.test
+.env.production
+*.env
+
+# Python Virtual Environments
+.venv/
 venv/
 ENV/
+env/
 env.bak/
 venv.bak/
-virt/
 
-
-# MacOS
-.DS_Store
-
-# Coverage reports
-htmlcov/
-.tox/
+# Testing and Coverage
+.pytest_cache/
 .coverage
 .coverage.*
-.cache
+htmlcov/
+.tox/
 nosetests.xml
 coverage.xml
 *.cover
-*.py,cover
+.hypothesis/
 
-# pipenv
-Pipfile.lock
+# IDE
+.idea/                # PyCharm
+.vscode/             # VS Code
+*.sublime-project    # Sublime Text
+*.sublime-workspace
+*.code-workspace
 
-# celery beat schedule file
+# System Files
+.DS_Store            # macOS
+Thumbs.db           # Windows
+desktop.ini
+$RECYCLE.BIN/
+
+# Project Specific
+migrations/          # Exclude migrations except __init__.py
+!migrations/__init__.py
+node_modules/        # If using npm/yarn for frontend
 celerybeat-schedule
-
-# dotenv
-*.env
-
-# Gunicorn
+*.pid               # Process ID files
 gunicorn.pid
 
-# node modules (if using npm/yarn for frontend)
-node_modules/
+# Temporary Files
+*.swp
+*.swo
+*~
+*.bak
