@@ -1,0 +1,8 @@
+Django>=4.2.0
+django-ckeditor>=6.7.0
+django-crispy-forms>=2.0
+crispy-bootstrap4>=2022.1
+Pillow>=10.0.0
+python-dotenv>=1.0.0
+whitenoise>=6.5.0
+gunicorn>=21.2.0
