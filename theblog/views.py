@@ -66,6 +66,9 @@ class CreatePostView(CreateView):
     model = BlogPost
     form_class = BlogPostForm
     template_name = 'create_post.html'
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
 class CreateCategoryView(CreateView):
     model = Category

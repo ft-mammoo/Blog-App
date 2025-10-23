@@ -18,10 +18,6 @@
             <button type="submit" class="btn btn-secondary">Post</button>
         </form>
     </div>
-    <script>
-        var name = "{{ user.id}}"
-        document.getElementById("authorid").value = name;
-    </script>
 {% else %}
     <h1>You must be logged in to create a new blog post.</h1>
     <a href="{% url 'login' %}">Login</a> or <a href="{% url 'signup' %}">Sign Up</a>

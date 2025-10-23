@@ -7,7 +7,7 @@ import bleach
 # Define a function to get choices, but don't call it at the module level!
 def get_category_choices():
     # This query runs ONLY when called, e.g., inside the form's __init__
-    return Category.objects.all().values_list('name', 'name')
+    return Category.objects.all().values_list('id', 'name')
 # --- END SAFELY GET CATEGORY CHOICES ---
 
 ALLOWED_TAGS = [
@@ -31,11 +31,11 @@ class BlogPostForm(forms.ModelForm):
 
     class Meta:
         model = BlogPost
-        fields = ['title', 'title_tag', 'author', 'category', 'content', 'snippet']
+        fields = ['title', 'title_tag', 'category', 'content', 'snippet']
         widgets = {
             'title' : forms.TextInput(attrs={'class' : 'form-control', 'placeholder': 'Enter title here'}),
             'title_tag' : forms.TextInput(attrs={'class' : 'form-control', 'placeholder' : 'Enter title tag here'}),
-            'author' : forms.TextInput(attrs={'class' : 'form-control', 'id' : 'authorid', 'value' : '', 'type' : 'hidden'}),
+            #'author' : forms.TextInput(attrs={'class' : 'form-control', 'id' : 'authorid', 'value' : '', 'type' : 'hidden'}),
             'category' : forms.Select(attrs={'class' : 'form-control', 'placeholder' : 'Select category'}),
             'snippet' : forms.TextInput(attrs={'class' : 'form-control', 'placeholder' : 'Enter a brief snippet about the post'}),
         }
