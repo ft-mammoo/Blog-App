@@ -1,3 +1,4 @@
+
 # Django Blog Application
 
 A feature-rich blogging platform built with Django, allowing users to create, edit, and interact with blog posts.
