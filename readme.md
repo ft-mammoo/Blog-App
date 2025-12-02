@@ -19,7 +19,7 @@ A feature-rich blogging platform built with Django, allowing users to create, ed
 - Python 3.10+
 - Bootstrap 4
 - SQLite Database
-- CKEditor for Rich Text Editing
+- TinyMCE for Rich Text Editing
 
 ## Installation
 
