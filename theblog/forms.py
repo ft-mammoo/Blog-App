@@ -1,14 +1,10 @@
 from django import forms
 from .models import BlogPost, Category
-from ckeditor.widgets import CKEditorWidget
 import bleach
 
-# --- SAFELY GET CATEGORY CHOICES ---
-# Define a function to get choices, but don't call it at the module level!
+
 def get_category_choices():
-    # This query runs ONLY when called, e.g., inside the form's __init__
     return Category.objects.all().values_list('id', 'name')
-# --- END SAFELY GET CATEGORY CHOICES ---
 
 ALLOWED_TAGS = [
     'p', 'br', 'strong', 'em', 'u', 'ol', 'ul', 'li', 'blockquote', 'h1', 'h2', 'h3',
@@ -23,7 +19,6 @@ ALLOWED_ATTRIBUTES = {
 
 
 class BlogPostForm(forms.ModelForm):
-    content = forms.CharField(widget=CKEditorWidget())
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -53,7 +48,6 @@ class BlogPostForm(forms.ModelForm):
         return content
 
 class EditBlogPostForm(forms.ModelForm):
-    content = forms.CharField(widget=CKEditorWidget())
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
