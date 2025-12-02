@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'theblog',
     'members',
-    'ckeditor',
+    'tinymce',
 ]
 
 MIDDLEWARE = [
@@ -125,24 +125,16 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 
-# Basic CKEditor Configuration
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': 'MinimalBlog', 
-        
-        'toolbar_MinimalBlog': [
-            ['Styles', 'Format', 'Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker', 'Undo', 'Redo'],
-            ['Link', 'Unlink', 'Anchor'],
-            ['Image','Flash', 'Table', 'HorizontalRule'],
-            ['TextColor', 'BGColor'],
-            ['Smiley', 'SpecialChar'], 
-            ['Source'],
-        ],
-        
-        'extraPlugins': 'justify,liststyle,indent',
-        'height': 300,
-        'width': '100%',
-    },
+# Basic TinyMCE Configuration
+TINYMCE_JS_URL = 'tinymce/tinymce.min.js'
+TINYMCE_JS_ROOT = BASE_DIR / 'static/tinymce'
+
+TINYMCE_DEFAULT_CONFIG = {
+    'menubar': False,
+    'plugins': 'advlist autolink lists link image code fullscreen help',
+    'toolbar': 'undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | image link | code | help',
+    'height': 400,
+    'width': '100%',
 }
 
 
