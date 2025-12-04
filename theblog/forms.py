@@ -1,6 +1,7 @@
 from django import forms
 from .models import BlogPost, Category
 import bleach
+from bleach.css_sanitizer import CSSSanitizer
 
 
 def get_category_choices():
@@ -26,7 +27,7 @@ class BlogPostForm(forms.ModelForm):
 
     class Meta:
         model = BlogPost
-        fields = ['title', 'title_tag', 'category', 'content', 'snippet']
+        fields = ['title', 'title_tag', 'category', 'content', 'snippet', 'header_image']
         widgets = {
             'title' : forms.TextInput(attrs={'class' : 'form-control', 'placeholder': 'Enter title here'}),
             'title_tag' : forms.TextInput(attrs={'class' : 'form-control', 'placeholder' : 'Enter title tag here'}),
@@ -38,10 +39,12 @@ class BlogPostForm(forms.ModelForm):
     def clean_content(self):
         content = self.cleaned_data.get('content')
         if content:
+            css_sanitizer = CSSSanitizer()
             sanitized_content = bleach.clean(
                 content,
                 tags=ALLOWED_TAGS,
                 attributes=ALLOWED_ATTRIBUTES,
+                css_sanitizer=css_sanitizer,
                 strip=True
             )
             return sanitized_content
@@ -55,7 +58,7 @@ class EditBlogPostForm(forms.ModelForm):
         
     class Meta:
         model = BlogPost
-        fields = ['title', 'title_tag', 'category', 'content', 'snippet']
+        fields = ['title', 'title_tag', 'category', 'content', 'snippet', 'header_image']
         widgets = {
             'title' : forms.TextInput(attrs={'class' : 'form-control', 'placeholder': 'Enter title here'}),
             'title_tag' : forms.TextInput(attrs={'class' : 'form-control', 'placeholder' : 'Enter title tag here'}),
@@ -66,10 +69,12 @@ class EditBlogPostForm(forms.ModelForm):
     def clean_content(self):
         content = self.cleaned_data.get('content')
         if content:
+            css_sanitizer = CSSSanitizer()
             sanitized_content = bleach.clean(
                 content,
                 tags=ALLOWED_TAGS,
                 attributes=ALLOWED_ATTRIBUTES,
+                css_sanitizer=css_sanitizer,
                 strip=True
             )
             return sanitized_content
