@@ -29,6 +29,12 @@
 {% endif %}
 <br/>
 <small>@{{ blogpost.author }}</small><br><hr>
+{% if blogpost.header_image %}
+    <div>
+        <img src="{{ blogpost.header_image.url }}" alt="Blog Media" style="max-width:100%; height:auto;"> 
+    </div>
+    <br>
+{% endif %}
 <p>{{ blogpost.content | safe | linebreaks }}</p>
 
 <br><hr><br>
