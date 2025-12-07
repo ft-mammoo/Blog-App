@@ -12,6 +12,14 @@ class Category(models.Model):
         return self.name
     def get_absolute_url(self):
         return reverse('home')
+    
+class Profile(models.Model):
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    bio = models.TextField()
+
+    def __str__(self):
+        return str(self.user)
+
 class BlogPost(models.Model):
     title = models.CharField(max_length=255)
     header_image = models.ImageField(null=True, blank=True, upload_to="images/")
