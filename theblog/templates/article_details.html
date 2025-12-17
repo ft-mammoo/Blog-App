@@ -76,4 +76,45 @@
 <br><hr><br>
 
 <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
+
+<br><hr><br>
+
+<div class="card mb-3">
+    <div class="row g-0">
+        <div class="col-md-2">
+            <img src="{{ blogpost.author.profile.profile_pic.url }}" class="img-fluid rounded border border-4" alt="Author Profile Picture">
+        </div>
+        <div class="col-md-10">
+            <div class="card-body">
+                <h5 class="card-title">
+                    {{ blogpost.author.first_name }}
+                    {{ blogpost.author.last_name }}
+                </h5>
+                <p class="card-text">
+                    <small class="text-body-secondary">
+                        {% if blogpost.author.profile.website_url %}
+                            <a href="{{ blogpost.author.profile.website_url }}">[Website]</a>
+                        {% endif %}
+                        {% if blogpost.author.profile.facebook_url %}
+                            <a href="{{ blogpost.author.profile.facebook_url }}">[Facebook]</a>
+                        {% endif %}
+                        {% if blogpost.author.profile.x_url %}
+                            <a href="{{ blogpost.author.profile.x_url }}">[X]</a>
+                        {% endif %}
+                        {% if blogpost.author.profile.instagram_url %}
+                            <a href="{{ blogpost.author.profile.instagram_url }}">[Instagram]</a>
+                        {% endif %}
+                        {% if blogpost.author.profile.pinterest_url %}
+                            <a href="{{ blogpost.author.profile.pinterest_url }}">[Pinterest]</a>
+                        {% endif %}
+                    </small>
+                </p>
+                <p class="card-text">
+                    {{ blogpost.author.profile.bio }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
