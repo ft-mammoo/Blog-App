@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404
 from django.views import generic
 from django.urls import reverse_lazy
-from .forms import SignUpForm, EditProfileForm, PasswordsChangeForm
+from .forms import SignUpForm, ProfileSettingsForm, PasswordsChangeForm, EditProfilePageForm
 from django.contrib.auth.views import PasswordChangeView
 from theblog.models import Profile
 
@@ -14,15 +14,21 @@ class ShowProfilePageView(generic.DetailView):
         page_user = get_object_or_404(Profile, id=self.kwargs['pk'])
         context['page_user'] = page_user
         return context
+    
+class EditProfilePageView(generic.UpdateView):
+    model = Profile
+    form_class = EditProfilePageForm
+    template_name = 'registration/edit_profile_page.html'
+    success_url = reverse_lazy('home')
 
 class SignUpView(generic.CreateView):
     form_class = SignUpForm
     template_name = 'registration/signup.html'
     success_url = reverse_lazy('login')
 
-class EditProfileView(generic.UpdateView):
-    form_class = EditProfileForm
-    template_name = 'registration/edit_profile.html'
+class ProfileSettingsView(generic.UpdateView):
+    form_class = ProfileSettingsForm
+    template_name = 'registration/profile_settings.html'
     success_url = reverse_lazy('home')
 
     def get_object(self):

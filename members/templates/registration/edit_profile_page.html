@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Edit Profile Page
+{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+    {% if user.id == profile.user.id %}
+    <h1>Edit Profile Page</h1>
+    <br><hr>
+
+    <div class="form-group">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-secondary">Update Profile</button>
+        </form>
+    </div>
+    {% else %}
+        <h1>You do not have permission to edit this profile page.</h1>
+        <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
+    {% endif %}
+{% else %}
+    <h1>You must be logged in to Edit Profile Page.</h1>
+    <a href="{% url 'login' %}">Login</a> or <a href="{% url 'signup' %}">Sign Up</a>
+{% endif %}
+
+{% endblock %}
