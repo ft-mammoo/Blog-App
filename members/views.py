@@ -1,9 +1,19 @@
 from django.shortcuts import get_object_or_404
 from django.views import generic
 from django.urls import reverse_lazy
-from .forms import SignUpForm, ProfileSettingsForm, PasswordsChangeForm, EditProfilePageForm
+from .forms import SignUpForm, ProfileSettingsForm, PasswordsChangeForm, CreateProfilePageForm,EditProfilePageForm
 from django.contrib.auth.views import PasswordChangeView
 from theblog.models import Profile
+
+class CreateProfilePageView(generic.CreateView):
+    model = Profile
+    form_class = CreateProfilePageForm
+    template_name = 'registration/create_profile_page.html'
+    success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 class ShowProfilePageView(generic.DetailView):
     model = Profile
