@@ -43,6 +43,18 @@ class PasswordsChangeForm(PasswordChangeForm):
         model = User
         fields = ('old_password', 'new_password1', 'new_password2')
 
+class CreateProfilePageForm(forms.ModelForm):
+    bio = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
+    profile_pic = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
+    website_url = forms.URLField(widget=forms.URLInput(attrs={'class': 'form-control'}), required=False)
+    facebook_url = forms.URLField(widget=forms.URLInput(attrs={'class': 'form-control'}), required=False)
+    x_url = forms.URLField(widget=forms.URLInput(attrs={'class': 'form-control'}), required=False)
+    instagram_url = forms.URLField(widget=forms.URLInput(attrs={'class': 'form-control'}), required=False)
+
+    class Meta:
+        model = Profile
+        fields = ('bio', 'profile_pic', 'website_url', 'facebook_url', 'x_url', 'instagram_url')
+
 class EditProfilePageForm(forms.ModelForm):
     bio = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
     profile_pic = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
