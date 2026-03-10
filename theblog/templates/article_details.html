@@ -127,6 +127,27 @@
  
 <h2>Comments</h2>
 
+{% if user.is_authenticated %}
+    <p>Welcome, <strong>{{ user.username }}</strong>! Post a comment below.</p>
+    <button class="btn btn-primary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#commentForm" aria-expanded="false" aria-controls="commentForm">
+        Add a Comment
+    </button>
+    <div class="collapse" id="commentForm">
+        <div class="card card-body mb-3">
+            <form method="POST">
+                {% csrf_token %}
+                {{ comment_form.as_p }}
+                <button type="submit" class="btn btn-success">Post Comment</button>
+            </form>
+        </div>
+    </div>
+{% else %}
+    <p><a href="{% url 'login' %}">Log in</a> to post a comment.</p>
+{% endif %}
+
+<br><hr><br>
+
+
 {% if blogpost.comments.count > 0 %}
     {% for comment in blogpost.comments.all %}
         <div class="card mb-3">
