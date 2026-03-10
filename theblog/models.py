@@ -51,4 +51,4 @@ class Comment(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return '%s - %s' % (self.post.title, self.name)
+        return '%s - %s' % (self.blogpost.title, self.name)
