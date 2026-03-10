@@ -1,5 +1,5 @@
 from django import forms
-from .models import BlogPost, Category
+from .models import BlogPost, Category, Comment
 import bleach
 from bleach.css_sanitizer import CSSSanitizer
 
@@ -79,3 +79,15 @@ class EditBlogPostForm(forms.ModelForm):
             )
             return sanitized_content
         return content
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['body']
+
+        widgets = {
+            'body': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter your comment'}),
+        }
+        labels = {
+            'body': '',
+        }
