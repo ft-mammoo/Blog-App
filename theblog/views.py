@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import BlogPost, Category
-from .forms import BlogPostForm, EditBlogPostForm
+from .forms import BlogPostForm, EditBlogPostForm, CommentForm
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 
@@ -53,6 +53,8 @@ class ArticleDetailView(DetailView):
         context = super(ArticleDetailView, self).get_context_data(*args, **kwargs)
         blogpost = self.object
 
+        context['comment_form'] = CommentForm()
+
         if self.request.user.is_authenticated:
             context['has_liked'] = blogpost.likes.filter(id=self.request.user.id).exists()
             context['has_disliked'] = blogpost.dislikes.filter(id=self.request.user.id).exists()
@@ -61,6 +63,21 @@ class ArticleDetailView(DetailView):
             context['has_disliked'] = False
 
         return context  
+    
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        context = self.get_context_data(object=self.object)
+        comment_form = CommentForm(request.POST)
+
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.blogpost = self.object
+            comment.name = self.request.user.username
+            comment.save()
+            return HttpResponseRedirect(reverse_lazy('article-detail', args=[str(self.object.pk)]))
+
+        context['comment_form'] = comment_form
+        return self.render_to_response(context)
 
 class CreatePostView(CreateView):
     model = BlogPost
