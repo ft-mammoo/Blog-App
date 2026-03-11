@@ -50,28 +50,6 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url "create-category" %}">Create Category</a>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    {{ user.username }}
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{% url "profile_settings" %}">Profile Settings</a></li>
-                                     {% if user.profile.id %}
-                                    <li><a class="dropdown-item" href="{% url "edit_profile_page" user.profile.id %}">Edit Profile Page</a></li>
-                                    <li><a class="dropdown-item" href="{% url "show_profile_page" user.profile.id %}">Show Profile Page</a></li>
-                                    {% else %}
-                                     <li><a class="dropdown-item" href="{% url "create_profile_page" %}">Create Profile Page</a></li>
-                                     {% endif %}
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <form method="post" action="{% url "logout" %}" class="d-inline">
-                                    {% csrf_token %}
-                                    <button type="submit" class="nav-link" style="background: none; border: none; padding: .5rem 1rem; color: rgba(255, 255, 255, .55);">
-                                        Logout
-                                    </button>
-                                </form>
-                            </li>
                         {% else %}
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url "signup" %}">SignUp</a>
@@ -80,7 +58,35 @@
                                 <a class="nav-link" href="{% url "login" %}">Login</a>
                             </li>
                         {% endif %}
-                    </ul>    
+                    </ul>  
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            {% if user.is_authenticated %}
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Welcome, <strong>{{ user.first_name }} {{ user.last_name }}</strong>!
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="{% url "profile_settings" %}">Profile Settings</a></li>
+                                         {% if user.profile.id %}
+                                            <li><a class="dropdown-item" href="{% url "edit_profile_page" user.profile.id %}">Edit Profile Page</a></li>
+                                            <li><a class="dropdown-item" href="{% url "show_profile_page" user.profile.id %}">Show Profile Page</a></li>
+                                        {% else %}
+                                            <li><a class="dropdown-item" href="{% url "create_profile_page" %}">Create Profile Page</a></li>
+                                        {% endif %}
+                                        <li class="nav-item">
+                                            <form method="post" action="{% url "logout" %}" class="d-inline">
+                                                {% csrf_token %}
+                                                <button type="submit" class="nav-link" style="background: none; border: none; padding: .5rem 1rem; color: rgba(255, 255, 255, .55);">
+                                                    Logout
+                                                </button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </li>
+                            {% endif %}
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>
