@@ -24,7 +24,7 @@
     {% endif %}
 {% else %}
     <h1>You must be logged in to edit a blog post.</h1>
-    <a href="{% url 'login' %}?next={{ request.path }}">Login</a> or <a href="{% url 'signup' %}">Sign Up</a>
+    <a href="{% url 'login' %}">Login</a> or <a href="{% url 'signup' %}">Sign Up</a>
 {% endif %}
 
 {% endblock %}
