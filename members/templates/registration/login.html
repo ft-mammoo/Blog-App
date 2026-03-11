@@ -13,20 +13,8 @@
 <div class="form-group">
     <form method="POST">
         {% csrf_token %}
-        <input type="hidden" name="next" value="{{ next }}">
-        {% if form.errors %}
-            <div class="alert alert-danger" role="alert">
-                Incorrect username or password. Please try again.
-            </div>
-        {% endif %}
-        <div class="mb-3">
-            <input type="text" class="form-control" placeholder="Username" name="username">
-        </div>
-        <div class="mb-3">
-            <input type="password" class="form-control" placeholder="Password" name="password">
-        </div>
+        {{ form.as_p }}
         <button type="submit" class="btn btn-secondary">Login</button>
-        <p><strong>Didn't have an account? <a href="{% url 'signup' %}">Register here</a>.</strong></p>
     </form>
 </div>
 
