@@ -119,7 +119,7 @@
     </form>
 {% else %}
     <p>
-        <a href="{% url 'login' %}?next={{ request.path }}">Login</a> or <a href="{% url 'signup' %}">Sign Up</a> to like or dislike this post.
+        <a href="{% url 'login' %}">Log in</a> to like or dislike this post.
     </p>
 {% endif %}
 
@@ -142,7 +142,7 @@
         </div>
     </div>
 {% else %}
-    <p><a href="{% url 'login' %}?next={{ request.path }}">Login</a> or <a href="{% url 'signup' %}">Sign Up</a> to post a comment.</p>
+    <p><a href="{% url 'login' %}">Log in</a> to post a comment.</p>
 {% endif %}
 
 <br><hr><br>

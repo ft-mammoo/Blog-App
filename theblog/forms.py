@@ -64,7 +64,6 @@ class EditBlogPostForm(forms.ModelForm):
             'title_tag' : forms.TextInput(attrs={'class' : 'form-control', 'placeholder' : 'Enter title tag here'}),
             'category' : forms.Select(attrs={'class' : 'form-control', 'placeholder' : 'Select category'}),
             'snippet' : forms.TextInput(attrs={'class' : 'form-control', 'placeholder' : 'Enter a brief snippet about the post'}),
-            'header_image' : forms.ClearableFileInput(attrs={'class' : 'form-control-file', 'placeholder' : 'Upload header image'}),
         }
         
     def clean_content(self):
